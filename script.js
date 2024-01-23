@@ -1,30 +1,14 @@
-// script.js
+let text = document.getElementById('btn').innerText;
+let delay = 2000; // Replace with your desired delay in milliseconds
 
-document.getElementById('btn').addEventListener('click', async function() {
-  // Get user input values
-  const textInput = document.getElementById('text').value;
-  const delayInput = document.getElementById('delay').value;
+if (text && delay) {
+  let myPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(text);
+    }, delay);
+  });
 
-  // Validate inputs
-  if (textInput.trim() === '' || isNaN(delayInput) || delayInput < 0) {
-    alert('Please enter valid values for Text and Delay.');
-    return;
-  }
+  let text2 = await myPromise;
 
-  // Convert delayInput to milliseconds
-  const delayInMilliseconds = parseInt(delayInput) * 1000;
-
-  // Display a loading message immediately
-  document.getElementById('output').innerText = 'Loading...';
-
-  // Wait for the specified delay before resolving
-  await delay(delayInMilliseconds);
-
-  // Display the user input text after the delay
-  document.getElementById('output').innerText = textInput;
-});
-
-// Function to create a delay using Promises
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  document.getElementById("output").textContent = text2;
 }
